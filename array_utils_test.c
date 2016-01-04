@@ -24,9 +24,22 @@ void test_create(){
   printf("create creates an array util with size 5 and typeSize 4 \n");
 }
 
+void test_resize(){
+  ArrayUtil a = create(4, 5);
+  ArrayUtil new_a = resize(a, 10);
+
+  assert(new_a.length == 10);
+  printf("Array size is resized to greater length\n");
+
+  ArrayUtil new_util = resize(a, 3);
+  assert(new_util.length == 3);
+  printf("Array size is resized to smaller length\n");
+}
+
 int main(){
   test_areEqual_when_they_are_actually_Equal();
   test_areEqual_when_they_are_not_equal();
   test_create();
+  test_resize();
   return 0;
 }

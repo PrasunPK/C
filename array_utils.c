@@ -16,4 +16,7 @@ ArrayUtil create(int typeSize, int length){
   return  array_util;
 }
 
-
+ArrayUtil resize(ArrayUtil util, int length){
+  ArrayUtil new_array = create(util.typeSize, length);
+  return new_array;
+}
