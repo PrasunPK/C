@@ -2,9 +2,16 @@
 #include "array_utils.h"
 
 int areEqual(ArrayUtil a, ArrayUtil b){
-  if((a.typeSize == b.typeSize) && (a.length == b.length))
-    return 0;
-  return 1;
+  char *list_of_a = (char *)a.base;
+  char *list_of_b = (char *)b.base;
+  if((a.typeSize == b.typeSize) && (a.length == b.length)){
+    for(int i = 0; i < a.length; i++){
+      if(list_of_a[i] != list_of_b[i])
+        return 0;
+    }
+    return 1;
+  }
+  return 0;
 }
 
 ArrayUtil create(int typeSize, int length){
@@ -17,6 +24,7 @@ ArrayUtil create(int typeSize, int length){
 }
 
 ArrayUtil resize(ArrayUtil util, int length){
-  ArrayUtil new_array = create(util.typeSize, length);
-  return new_array;
+  int total_byte = util.typeSize * util.length;
+  util.base = realloc(util.base, total_byte) ;
+  return util;
 }
