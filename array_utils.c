@@ -1,11 +1,5 @@
 #include <stdlib.h>
-#include <stdio.h>
-
-typedef struct {
-  void *base;
-  int typeSize;
-  int length;
-} ArrayUtil;
+#include "array_utils.h"
 
 int areEqual(ArrayUtil a, ArrayUtil b){
   if((a.typeSize == b.typeSize) && (a.length == b.length))
@@ -22,13 +16,4 @@ ArrayUtil create(int typeSize, int length){
   return  array_util;
 }
 
-int main(){
-  int length = 5, typeSize = sizeof(int);
-  
-  ArrayUtil a = create(typeSize, length);
-  ArrayUtil b = create(typeSize, length);
-  printf("Equality : %d\n",areEqual(a, b));
- 
-  printf("%d\n",a[0]); 
-  return 0;
-}
+
