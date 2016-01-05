@@ -5,14 +5,13 @@
 int areEqual(ArrayUtil a, ArrayUtil b){
   char *list_of_a = (char *)a.base;
   char *list_of_b = (char *)b.base;
-  if((a.typeSize == b.typeSize) && (a.length == b.length)){
-    for(int i = 0; i < a.length; i++){
-      if(list_of_a[i] != list_of_b[i])
-        return 0;
-    }
-    return 1;
+  if((a.typeSize != b.typeSize) || (a.length != b.length))
+    return 0;
+  for(int i = 0; i < a.length; i++){
+    if(list_of_a[i] != list_of_b[i])
+      return 0;
   }
-  return 0;
+  return 1;
 }
 
 ArrayUtil create(int typeSize, int length){
@@ -31,14 +30,13 @@ ArrayUtil resize(ArrayUtil util, int length){
 }
 
 int findIndex(ArrayUtil util, void *element){
-  int index = -1;
   char *list = (char *)util.base;
   for(int i = 0; i < util.length; i++){
     if(memcmp(list, element, util.typeSize) == 0)
       return i;
     list += util.typeSize;
   }
-  return index;
+  return -1;
 }
 
 void dispose(ArrayUtil array){

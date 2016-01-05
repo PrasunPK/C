@@ -86,8 +86,34 @@ void test_findIndex(){
   assert(findIndex(a, &y) == 3);
   assert(findIndex(a, &z) == -1);
   printf("findindex gives the index of the present element\n");
+ 
+  ArrayUtil b = create(4,4);
+  float * list = (float *)(b.base);
+  list[0] = 1.2;
+  list[1] = 2.4;
+  list[2] = 3.5;
+  list[3] = 5.7;
+
+  float m = 2.4;
+  assert(findIndex(b, &m) == 1);
+
+  printf("findIndex also works for floating point numbers\n");
   
+  ArrayUtil c = create(1,4);
+  char * list_ch = (char *)(c.base);
+  list_ch[0] = 'A';
+  list_ch[1] = 'B';
+  list_ch[2] = 'P';
+  list_ch[3] = 'F';
+
+  char ch = 'P';
+  assert(findIndex(c, &ch) == 2);
+
+  printf("findIndex also works for characters\n");
+
   dispose(a);
+  dispose(b);
+  dispose(c);
 }
 
 int main(){
