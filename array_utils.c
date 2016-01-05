@@ -49,3 +49,22 @@ void * findFirst(ArrayUtil util, MatchFunc* match, void * hint){
   }
   return NULL;
 }
+
+void * findLast(ArrayUtil util, MatchFunc* match, void * hint){
+  int *list_of_array = util.base;
+  for(int i = util.length-1 ; i >= 0 ; i-- ){
+    if(match(hint, &list_of_array[i]))
+      return &list_of_array[i];
+  }
+  return NULL;
+}
+
+int count(ArrayUtil util, MatchFunc* match, void *hint){
+    int *list_of_array = util.base;
+    int count = 0;
+    for(int i = 0; i < util.length ; i++){
+      if(match(hint, &list_of_array[i]))
+        count++;
+    }
+    return count;
+}

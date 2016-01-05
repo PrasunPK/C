@@ -148,6 +148,41 @@ void test_findFirst(){
   printf("findFirst finds the first divisable number by 3 from the list\n");
 }
 
+void test_findLast(){
+  ArrayUtil a = create(4,5);
+  int * list_array = (int *)(a.base);
+  list_array[0] = 12;
+  list_array[1] = 25;
+  list_array[2] = 34;
+  list_array[3] = 45;
+  list_array[4] = 5;
+  
+  assert(*(int *)findLast(a, &isEven, NULL) == 34);
+  printf("findLast finds the last even number of the list\n");
+
+  int x = 5;
+  assert(*(int *)findLast(a, &isDivisable, &x) == 5);
+  printf("findLast finds the last divisable number by 5 from the list\n");
+}
+
+void test_count(){
+   ArrayUtil a = create(4,5);
+  int * list_array = (int *)(a.base);
+  list_array[0] = 12;
+  list_array[1] = 25;
+  list_array[2] = 34;
+  list_array[3] = 45;
+  list_array[4] = 5;
+  
+  assert(count(a, &isEven, NULL) == 2);
+  printf("count gives the number of the even numbers\n");
+
+  int x = 5;
+  assert(count(a, &isDivisable, &x) == 3);
+  printf("count gives the number of the divisable numbers by 5\n");
+}
+
+
 int main(){
   test_areEqual_when_they_are_actually_Equal();
   test_areEqual_when_they_are_not_equal();
@@ -155,5 +190,7 @@ int main(){
   test_resize();
   test_findIndex();
   test_findFirst();
+  test_findLast();
+  test_count();
   return 0;
 }
