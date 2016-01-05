@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <string.h>
 #include "array_utils.h"
 
 int areEqual(ArrayUtil a, ArrayUtil b){
@@ -27,4 +28,19 @@ ArrayUtil resize(ArrayUtil util, int length){
   int total_byte = util.typeSize * util.length;
   util.base = realloc(util.base, total_byte) ;
   return util;
+}
+
+int findIndex(ArrayUtil util, void *element){
+  int index = -1;
+  char *list = (char *)util.base;
+  for(int i = 0; i < util.length; i++){
+    if(memcmp(list, element, util.typeSize) == 0)
+      return i;
+    list += util.typeSize;
+  }
+  return index;
+}
+
+void dispose(ArrayUtil array){
+  free(array.base);
 }

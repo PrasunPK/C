@@ -7,6 +7,8 @@ void test_areEqual_when_they_are_actually_Equal(){
   ArrayUtil b = create(4, 5);
   assert(areEqual(a,b) == 1);
   printf("Two array utils are equal\n");
+  dispose(a);
+  dispose(b);
 }
 
 void test_areEqual_when_they_are_not_equal(){
@@ -14,6 +16,8 @@ void test_areEqual_when_they_are_not_equal(){
   ArrayUtil b = create(4, 7);
   assert(areEqual(a,b) == 0);
   printf("Two array utils are not equal\n");
+  dispose(a);
+  dispose(b);
 }
 
 void test_create(){
@@ -34,6 +38,9 @@ void test_create(){
     assert(list_array[3] == 40);
     assert(list_array[4] == 50);
     printf("Array element can be inserted and accessed\n");
+
+    dispose(a);
+    dispose(util);
 
 }
 
@@ -58,6 +65,29 @@ void test_resize(){
   assert(list_array[4] == 50);
 
   printf("Array element is not changed\n");
+
+  dispose(util);
+}
+
+void test_findIndex(){
+  ArrayUtil a = create(4,5);
+  int * list_array = (int *)(a.base);
+  list_array[0] = 1;
+  list_array[1] = 2;
+  list_array[2] = 3;
+  list_array[3] = 4;
+  list_array[4] = 5;
+
+  int x = 3;
+  int y = 4;
+  int z = 14;
+
+  assert(findIndex(a, &x) == 2);
+  assert(findIndex(a, &y) == 3);
+  assert(findIndex(a, &z) == -1);
+  printf("findindex gives the index of the present element\n");
+  
+  dispose(a);
 }
 
 int main(){
@@ -65,5 +95,6 @@ int main(){
   test_areEqual_when_they_are_not_equal();
   test_create();
   test_resize();
+  test_findIndex();
   return 0;
 }
