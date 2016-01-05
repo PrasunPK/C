@@ -4,9 +4,11 @@ typedef struct {
   int length;
 } ArrayUtil;
 
+typedef int MatchFunc(void *, void *);
 
 int areEqual(ArrayUtil , ArrayUtil );
 ArrayUtil create(int , int);
 ArrayUtil resize(ArrayUtil, int);
 int findIndex(ArrayUtil util, void *element);
 void dispose(ArrayUtil);
+void * findFirst(ArrayUtil util, MatchFunc* match, void* hint);

@@ -116,11 +116,44 @@ void test_findIndex(){
   dispose(c);
 }
 
+int isEven(void* hint, void* item){
+  int *number = (int *)(item);
+  return !(*number % 2);
+}
+
+int isDivisable(void *hint, void *item){
+  int *number = (int *)(item);
+  int *given_hint = (int *)(hint);
+  
+  if(*number % *given_hint == 0)
+    return 1;
+  return 0; 
+
+}
+
+void test_findFirst(){
+  ArrayUtil a = create(4,5);
+  int * list_array = (int *)(a.base);
+  list_array[0] = 12;
+  list_array[1] = 2;
+  list_array[2] = 34;
+  list_array[3] = 4;
+  list_array[4] = 5;
+  
+  assert(*(int *)findFirst(a, &isEven, NULL) == 12);
+  printf("findFirst finds the first even number of the list\n");
+
+  int x = 3;
+  assert(*(int *)findFirst(a, &isDivisable, &x) == 12);
+  printf("findFirst finds the first divisable number by 3 from the list\n");
+}
+
 int main(){
   test_areEqual_when_they_are_actually_Equal();
   test_areEqual_when_they_are_not_equal();
   test_create();
   test_resize();
   test_findIndex();
+  test_findFirst();
   return 0;
 }

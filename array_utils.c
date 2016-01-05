@@ -7,10 +7,8 @@ int areEqual(ArrayUtil a, ArrayUtil b){
   char *list_of_b = (char *)b.base;
   if((a.typeSize != b.typeSize) || (a.length != b.length))
     return 0;
-  for(int i = 0; i < a.length; i++){
-    if(list_of_a[i] != list_of_b[i])
-      return 0;
-  }
+  if(memcmp(list_of_a, list_of_b, a.typeSize))
+    return 0;
   return 1;
 }
 
@@ -41,4 +39,13 @@ int findIndex(ArrayUtil util, void *element){
 
 void dispose(ArrayUtil array){
   free(array.base);
+}
+
+void * findFirst(ArrayUtil util, MatchFunc* match, void * hint){
+  int *list_of_array = util.base;
+  for(int i = 0; i < util.length ; i++){
+    if(match(hint, &list_of_array[i]))
+      return &list_of_array[i];
+  }
+  return NULL;
 }
