@@ -166,7 +166,7 @@ void test_findLast(){
 }
 
 void test_count(){
-   ArrayUtil a = create(4,5);
+  ArrayUtil a = create(4,5);
   int * list_array = (int *)(a.base);
   list_array[0] = 12;
   list_array[1] = 25;
@@ -182,15 +182,25 @@ void test_count(){
   printf("count gives the number of the divisable numbers by 5\n");
 }
 
+void test_filter(){
+  ArrayUtil a = create(4,5);
+  int * list_array = (int *)(a.base);
+  list_array[0] = 12;
+  list_array[1] = 25;
+  list_array[2] = 34;
+  list_array[3] = 45;
+  list_array[4] = 5;
 
-int main(){
-  test_areEqual_when_they_are_actually_Equal();
-  test_areEqual_when_they_are_not_equal();
-  test_create();
-  test_resize();
-  test_findIndex();
-  test_findFirst();
-  test_findLast();
-  test_count();
-  return 0;
+  ArrayUtil destination = create(4,5);
+  int maxItems = 5;
+  
+  assert(filter(a, &isEven, NULL, destination.base, maxItems ) == 2 );
+  printf("Values are being inserted\n");
+
+  int * list = (int *)(destination.base);
+  
+  assert(((int **)destination.base)[0] == &list_array[0]);
+  assert(((int **)destination.base)[1] == &list_array[2]);
+  printf("Two arrays are equal\n");
 }
+

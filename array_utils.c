@@ -7,7 +7,7 @@ int areEqual(ArrayUtil a, ArrayUtil b){
   char *list_of_b = (char *)b.base;
   if((a.typeSize != b.typeSize) || (a.length != b.length))
     return 0;
-  if(memcmp(list_of_a, list_of_b, a.typeSize))
+  if(memcmp(list_of_a, list_of_b, a.typeSize) != 0)
     return 0;
   return 1;
 }
@@ -67,4 +67,18 @@ int count(ArrayUtil util, MatchFunc* match, void *hint){
         count++;
     }
     return count;
+}
+
+
+int filter(ArrayUtil util, MatchFunc* match, void* hint, void** destination, int maxItems){
+  int count = 0;
+  void *num = util.base;
+  for(int i = 0; i < util.length ; i++){
+    if(match(hint,num) && count < maxItems){
+       destination[count] = num;
+       count++;
+    }
+    num = num + util.typeSize;
+  }
+  return count;  
 }

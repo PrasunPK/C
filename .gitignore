@@ -1,1 +1,7 @@
-result
+runTestForC.js
+arrayUtilTest
+.array_utils.c.swp
+.array_utils.h.swp
+.array_utils_test.c.swp
+.gitignore.swp
+
