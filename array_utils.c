@@ -92,3 +92,11 @@ void map(ArrayUtil source, ArrayUtil destination, ConvertFunc* convert, void* hi
     destination_array += destination.typeSize;
   }
 }
+
+void forEach(ArrayUtil util, OperationFunc* operate, void* hint){
+  void *source_array = util.base;
+  for(int i = 0; i < util.length; i++){
+    operate(hint, source_array);
+    source_array += util.typeSize;
+  }
+}

@@ -146,6 +146,7 @@ void test_findFirst(){
   int x = 3;
   assert(*(int *)findFirst(a, &isDivisable, &x) == 12);
   printf("findFirst finds the first divisable number by 3 from the list\n");
+  dispose(a);
 }
 
 void test_findLast(){
@@ -163,6 +164,8 @@ void test_findLast(){
   int x = 5;
   assert(*(int *)findLast(a, &isDivisable, &x) == 5);
   printf("findLast finds the last divisable number by 5 from the list\n");
+
+  dispose(a);
 }
 
 void test_count(){
@@ -180,6 +183,8 @@ void test_count(){
   int x = 5;
   assert(count(a, &isDivisable, &x) == 3);
   printf("count gives the number of the divisable numbers by 5\n");
+
+  dispose(a);
 }
 
 void test_filter(){
@@ -202,6 +207,9 @@ void test_filter(){
   assert(((int **)destination.base)[0] == &list_array[0]);
   assert(((int **)destination.base)[0] == &list_array[0]);
   printf("Two arrays are equal\n");
+
+  dispose(destination);
+  dispose(a);
 }
 
 void addTwo(void * hint, void *sourceItem, void *destinationItem){
@@ -226,4 +234,34 @@ void test_map(){
 
   assert(dest_array[0] == 14); 
   assert(dest_array[1] == 27);
+ 
+  printf("array now can be mapped with function"); 
+
+  dispose(a);
+  dispose(destination);
+}
+
+void square(void *hint, void *item){
+  *(int *)item = *(int *)item * *(int *)item;
+}
+
+void test_forEach(){
+  ArrayUtil a = create(4,5);
+  int * list_array = (int *)(a.base);
+  list_array[0] = 2;
+  list_array[1] = 5;
+  list_array[2] = 4;
+  list_array[3] = 8;
+  list_array[4] = 1;
+
+  void * x = NULL;
+  
+  forEach(a, &square, &x);
+  assert(list_array[0] == 4);
+  assert(list_array[3] == 64);
+  assert(list_array[4] == 1);
+
+  printf("forEach can be used to operate on the array elements and change their value");
+  
+  dispose(a);
 }
