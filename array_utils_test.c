@@ -200,7 +200,30 @@ void test_filter(){
   int * list = (int *)(destination.base);
   
   assert(((int **)destination.base)[0] == &list_array[0]);
-  assert(((int **)destination.base)[1] == &list_array[2]);
+  assert(((int **)destination.base)[0] == &list_array[0]);
   printf("Two arrays are equal\n");
 }
 
+void addTwo(void * hint, void *sourceItem, void *destinationItem){
+  *(int *)destinationItem =  *(int *)sourceItem + *(int *)hint ;
+}
+
+void test_map(){
+  ArrayUtil a = create(4,5);
+  int * list_array = (int *)(a.base);
+  list_array[0] = 12;
+  list_array[1] = 25;
+  list_array[2] = 34;
+  list_array[3] = 45;
+  list_array[4] = 5;
+
+  ArrayUtil destination = create(4,5);
+  
+  int x = 2;
+  map(a,destination,&addTwo,&x);
+  
+  int *dest_array = (int *)(destination.base);
+
+  assert(dest_array[0] == 14); 
+  assert(dest_array[1] == 27);
+}
