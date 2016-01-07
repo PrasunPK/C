@@ -265,3 +265,27 @@ void test_forEach(){
   
   dispose(a);
 }
+
+void * sum(void* hint, void* previousItem, void* item){
+  *(int *)previousItem += *(int *)item;
+  return previousItem;
+}
+
+void test_reduce(){
+  ArrayUtil a = create(4,5);
+  int * list_array = (int *)(a.base);
+  list_array[0] = 2;
+  list_array[1] = 5;
+  list_array[2] = 4;
+  list_array[3] = 8;
+  list_array[4] = 1;
+
+  int initialValue = 0;
+  
+  int * result = (int *)reduce(a, &sum, NULL, &initialValue);
+  
+  assert(*result == 20);
+
+  printf("reduce reduces to some value");
+  dispose(a);
+}

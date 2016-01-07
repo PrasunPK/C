@@ -10,6 +10,8 @@ typedef void ConvertFunc(void *, void *, void *);
 
 typedef void OperationFunc(void* , void* );
 
+typedef void* ReducerFunc(void* , void* , void* );
+
 int areEqual(ArrayUtil , ArrayUtil );
 ArrayUtil create(int , int);
 ArrayUtil resize(ArrayUtil, int);
@@ -21,3 +23,4 @@ int count(ArrayUtil , MatchFunc* , void *);
 int filter(ArrayUtil , MatchFunc* , void* , void** , int );
 void map(ArrayUtil source, ArrayUtil destination, ConvertFunc* convert, void* hint);
 void forEach(ArrayUtil util, OperationFunc* operation, void* hint);
+void* reduce(ArrayUtil util, ReducerFunc* reducer, void* hint, void* intialValue);
