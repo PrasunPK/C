@@ -12,10 +12,16 @@ void test_creatList(){
 void test_add_to_list(){
   LinkedList list = createList();
   int value = 10;
-  int length = add_to_list(&list, &value);
+
+  Element ele ;
+  ele.value = 20;
+  ele.next = NULL;
+
+  int length = add_to_list(&list, &ele);
 
   assert(length == 1);
   printf("One item has been added to the list\n");
-  assert(list.first->value == 10);
+  assert(list.first->value == 20);
+  assert(list.last->value == 20);
   printf("Item 10 has been added to the first and the last of the linked list for the first insertion\n");
-}
+};

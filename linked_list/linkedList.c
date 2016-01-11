@@ -14,10 +14,10 @@ LinkedList createList(void){
 
 int add_to_list(LinkedList *list, void *item){
   Element *el = (Element *)malloc(sizeof(Element));
-  el->value = item;
-  el->next = NULL;
+  // el->value = item;
+  // el->next = NULL;
   if(list->length == 0){
-    list->last = list->last = el;
+    list->first = list->last = item;
   }
   list->length++;
   return list->length; 
