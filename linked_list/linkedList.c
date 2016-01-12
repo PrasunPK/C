@@ -36,3 +36,11 @@ void *get_first_element(LinkedList list){
 void *get_last_element(LinkedList list){
   return list.last->value;
 }
+
+void forEach(LinkedList list,ElementProcessor e){
+  Element * ele = (Element *)list.first; 
+  while(ele != NULL){
+    e(ele->value);
+    ele = ele->next;
+  }
+}

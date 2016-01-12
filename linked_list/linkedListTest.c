@@ -68,3 +68,35 @@ void test_get_last_element(){
   printf("last item is changed afetr insertion of new element\n");
 
 }
+
+void increment(void *item){
+  *(int *)item = *(int *)item + 1;
+}
+
+void traverse(LinkedList list){
+  Element * ele = (Element *)list.first;
+  int count = 1;
+  while(ele != NULL){
+    assert(*(int *)ele->value == (10+count));
+    ele = ele->next;
+    count++;
+  }
+}
+
+void test_forEach(){
+  LinkedList list = createList();
+  void *item = (int *)malloc(sizeof(int));
+  *(int *)item = 10;
+  int length = add_to_list(&list, item);
+  void *item1 = (int *)malloc(sizeof(int));
+  *(int *)item1 = 11;
+  length = add_to_list(&list, item1);
+  void *item2 = (int *)malloc(sizeof(int));
+  *(int *)item2 = 12;
+  length = add_to_list(&list, item2);
+
+  forEach(list, &increment);
+  printf("Elements are incremented in a link list\n");
+  traverse(list);
+}
+
