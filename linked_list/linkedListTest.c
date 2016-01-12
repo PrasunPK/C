@@ -100,3 +100,31 @@ void test_forEach(){
   traverse(list);
 }
 
+void test_getElementAt(){
+  LinkedList list = createList();
+  void *item = (int *)malloc(sizeof(int));
+  *(int *)item = 10;
+  int length = add_to_list(&list, item);
+  void *item1 = (int *)malloc(sizeof(int));
+  *(int *)item1 = 11;
+  length = add_to_list(&list, item1);
+  void *item2 = (int *)malloc(sizeof(int));
+  *(int *)item2 = 12;
+  length = add_to_list(&list, item2);
+
+  void *item3 = (char *)malloc(sizeof(char));
+  *(char *)item3 = 'P';
+  length = add_to_list(&list, item3);
+
+
+  int element = *(int *)getElementAt(list, 1);
+  int element1 = *(int *)getElementAt(list, 2);
+  char element2 = *(char *)getElementAt(list, 3);
+  
+  assert(element == 11);
+  assert(element1 == 12);
+  assert(element2 == 'P');
+  printf("Element has been found at second position\n");
+}
+
+

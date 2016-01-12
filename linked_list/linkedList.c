@@ -44,3 +44,16 @@ void forEach(LinkedList list,ElementProcessor e){
     ele = ele->next;
   }
 }
+
+void * getElementAt(LinkedList list, int position){
+  Element * ele = (Element *)list.first; 
+  int count = 0;
+  while(ele != NULL){
+    if(count == position){
+      return ele->value;
+    }
+    count++;
+    ele = ele->next; 
+  }
+  return NULL;
+}
