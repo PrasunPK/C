@@ -143,13 +143,79 @@ void test_indexOf(){
   length = add_to_list(&list, item3);
   
   int item_to_find = 12;
-  int index = indexOf(list, item2);
+  int index = indexOf(list, item2); 
   
   assert(index == 2);
   printf("Item is found and returned the index correctly\n"); 
-
+  
+  index = indexOf(list, &item_to_find);
+  assert(index == -1); 
+  printf("returns -1 if item is not found\n");
 }
 
 void test_deleteElementAt(){
+  LinkedList list = createList();
+  void *item = (int *)malloc(sizeof(int));
+  *(int *)item = 10;
+  int length = add_to_list(&list, item);
+  void *item1 = (int *)malloc(sizeof(int));
+  *(int *)item1 = 11;
+  length = add_to_list(&list, item1);
+  void *item2 = (int *)malloc(sizeof(int));
+  *(int *)item2 = 12;
+  length = add_to_list(&list, item2);
+  void *item3 = (char *)malloc(sizeof(char));
+  *(char *)item3 = 'P';
+  length = add_to_list(&list, item3);
   
+  int index = 0; 
+  int * deleted_item = deleteElementAt(&list,index);
+
+  assert(*(int *)deleted_item == 10);
+  printf("Item has been deleted and returned\n");
+  
+  int item_to_find = 10;
+  assert(indexOf(list, item) == -1); 
+  printf("deleted item can not be found\n");
+  
+  index = 2; 
+  char * deleted_item_1 = deleteElementAt(&list,index);
+
+  assert(*(char *)deleted_item_1 == 'P');
+  assert(list.length == 2);
+  printf("Last item has been deleted and returned\n");
+  
+  assert(indexOf(list, &item3) == -1); 
+  printf("deleted item can not be found\n");
+
 }
+
+void test_deleteElementAt_deleting_from_middle(){
+  LinkedList list = createList();
+  void *item = (int *)malloc(sizeof(int));
+  *(int *)item = 10;
+  int length = add_to_list(&list, item);
+  void *item1 = (int *)malloc(sizeof(int));
+  *(int *)item1 = 11;
+  length = add_to_list(&list, item1);
+  void *item2 = (int *)malloc(sizeof(int));
+  *(int *)item2 = 12;
+  length = add_to_list(&list, item2);
+  void *item3 = (char *)malloc(sizeof(char));
+  *(char *)item3 = 'P';
+  length = add_to_list(&list, item3);
+  
+  int index = 2;
+  int * deleted_item = deleteElementAt(&list,index);
+  assert(*(int *)deleted_item == 12);
+  assert(list.length == 3);
+  printf("Item has been deleted from the middle and returned\n");
+
+  assert(indexOf(list, item2) == -1); 
+  printf("deleted item can not be found\n");
+}
+
+void test_asArray(){
+   
+}
+

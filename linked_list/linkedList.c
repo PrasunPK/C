@@ -60,7 +60,7 @@ void * getElementAt(LinkedList list, int position){
 }
 
 int indexOf(LinkedList list, void * item){
-  Element * ele = list.first; 
+  Element * ele = (Element *)list.first; 
   int index = 0;
   while(ele != NULL){
     if(ele->value == item)
@@ -72,5 +72,34 @@ int indexOf(LinkedList list, void * item){
 }
 
 void * deleteElementAt(LinkedList *list, int position){
+  Element * node = (Element *)list->first;
+  Element * previous, *prev;
+  int index = 0;
+  if(position > list->length)
+    return NULL;
+  while(node != NULL){
+    previous = node;
+    if(index == (position-1))
+        prev = node;  
 
+    if(index == position){
+      if(position == 0){
+        list->first = list->first->next;
+        list->length--;
+        return node->value;
+      }
+      if(position == (list->length-1)){
+        previous->next = NULL;
+        list->length--;
+        return node->value;
+      }
+      prev->next = node->next;
+      list->length--;
+      return node->value;
+    }
+    index++;
+    node = node->next;
+  }
 }
+
+
