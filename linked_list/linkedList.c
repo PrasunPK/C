@@ -40,6 +40,7 @@ void *get_last_element(LinkedList list){
 void forEach(LinkedList list,ElementProcessor e){
   Element * ele = (Element *)list.first; 
   while(ele != NULL){
+    
     e(ele->value);
     ele = ele->next;
   }
@@ -56,4 +57,20 @@ void * getElementAt(LinkedList list, int position){
     ele = ele->next; 
   }
   return NULL;
+}
+
+int indexOf(LinkedList list, void * item){
+  Element * ele = list.first; 
+  int index = 0;
+  while(ele != NULL){
+    if(ele->value == item)
+      return index;
+    ele = ele->next;
+    index++;
+  }
+  return -1;
+}
+
+void * deleteElementAt(LinkedList *list, int position){
+
 }
