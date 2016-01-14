@@ -23,3 +23,4 @@ int indexOf(LinkedList list, void * item);
 void * deleteElementAt(LinkedList *, int);
 int asArray(LinkedList, void **, int maxElements);
 LinkedList  filter(LinkedList, MatchFunc, void * );
+LinkedList reverse(LinkedList);

@@ -75,8 +75,6 @@ void * deleteElementAt(LinkedList *list, int position){
   Element * node = (Element *)list->first;
   Element * previous, *prev;
   int index = 0;
-  if(position > list->length)
-    return NULL;
   while(node != NULL){
     previous = node;
     if(index == (position-1))
@@ -100,6 +98,7 @@ void * deleteElementAt(LinkedList *list, int position){
     index++;
     node = node->next;
   }
+  return NULL;
 }
 
 int asArray(LinkedList list, void ** array, int maxElements){
@@ -124,4 +123,30 @@ LinkedList filter(LinkedList list, MatchFunc operate, void * hint){
     node = node->next;
   }
   return new_list;
+}
+
+void insert_in_list(LinkedList *new_list, void *item){
+  Element *item_to_insert = (Element *)malloc(sizeof(Element));
+  item_to_insert->value = item;
+  if(new_list->first == NULL ){
+    item_to_insert->next = NULL;
+    new_list->first = item_to_insert;
+    new_list->last = item_to_insert;
+    new_list->length++; 
+  }
+  else{
+    item_to_insert->next = new_list->first;
+    new_list->first = item_to_insert;
+    new_list->length++;
+  }
+}
+
+LinkedList reverse(LinkedList list){
+  LinkedList list_to_add = createList();
+  Element *node = (Element *)list.first;
+  while(node != NULL){
+    insert_in_list(&list_to_add, node->value);
+    node = node->next;
+  } 
+  return list_to_add;
 }
