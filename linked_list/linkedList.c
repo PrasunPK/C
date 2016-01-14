@@ -113,3 +113,15 @@ int asArray(LinkedList list, void ** array, int maxElements){
   }
   return index;
 }
+
+LinkedList filter(LinkedList list, MatchFunc operate, void * hint){
+  LinkedList new_list = createList();
+  Element * node = (Element *)list.first;
+  while(node != NULL){
+    if(operate(node->value, hint) == 0){
+      add_to_list(&new_list,node->value);
+    }
+    node = node->next;
+  }
+  return new_list;
+}

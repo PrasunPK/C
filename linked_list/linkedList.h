@@ -11,6 +11,8 @@ typedef struct {
 
 typedef void (*ElementProcessor)(void *);
 
+typedef int MatchFunc(void *, void *);
+
 LinkedList createList(void);
 int add_to_list(LinkedList *, void *);
 void *get_first_element(LinkedList list);
@@ -20,3 +22,4 @@ void * getElementAt(LinkedList, int );
 int indexOf(LinkedList list, void * item);
 void * deleteElementAt(LinkedList *, int);
 int asArray(LinkedList, void **, int maxElements);
+LinkedList  filter(LinkedList, MatchFunc, void * );

@@ -248,3 +248,36 @@ void test_asArray(){
   printf("Items are inserted into the given array\n");
 }
 
+int isEven(void * item, void * hint){
+  return *(int *)item % 2 ;
+}
+
+void test_filter(){
+  LinkedList list = createList();
+  void *item = (int *)malloc(sizeof(int));
+  *(int *)item = 10;
+  int length = add_to_list(&list, item);
+  void *item1 = (int *)malloc(sizeof(int));
+  *(int *)item1 = 11;
+  length = add_to_list(&list, item1);
+  void *item2 = (int *)malloc(sizeof(int));
+  *(int *)item2 = 12;
+  length = add_to_list(&list, item2);
+  void *item3 = (char *)malloc(sizeof(char));
+  *(char *)item3 = 13;
+  length = add_to_list(&list, item3);
+  
+  LinkedList filtered_list = filter(list, isEven, NULL);
+  
+  assert(filtered_list.length == 2);
+  printf("List has been filtered and has two items in it\n");
+  
+  int element = *(int *)getElementAt(filtered_list, 0);
+  int element1 = *(int *)getElementAt(filtered_list, 1);
+
+  assert(element == 10);
+  assert(element1 == 12);
+  printf("Two items are there in the filtered list\n");
+}
+
+
