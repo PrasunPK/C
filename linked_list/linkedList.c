@@ -102,4 +102,14 @@ void * deleteElementAt(LinkedList *list, int position){
   }
 }
 
-
+int asArray(LinkedList list, void ** array, int maxElements){
+  Element * ele = (Element *)list.first;
+  int index = 0;
+  while(ele != NULL && (index <= maxElements)){
+    *array = ele->value;
+    ele = ele->next;
+    array++;
+    index++;
+  }
+  return index;
+}

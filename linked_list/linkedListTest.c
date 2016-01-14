@@ -215,7 +215,36 @@ void test_deleteElementAt_deleting_from_middle(){
   printf("deleted item can not be found\n");
 }
 
+void traverseArray(LinkedList list, void **array, int maxItems){
+  Element * node = (Element *)list.first;
+  for(int i = 0;i <maxItems; i++){
+    assert(*(int *)node->value == *(int *)array[i]);
+    node = node->next;
+  }
+  printf("All the elements are same as the linked list\n");
+}
+
 void test_asArray(){
-   
+  LinkedList list = createList();
+  void *item = (int *)malloc(sizeof(int));
+  *(int *)item = 10;
+  int length = add_to_list(&list, item);
+  void *item1 = (int *)malloc(sizeof(int));
+  *(int *)item1 = 11;
+  length = add_to_list(&list, item1);
+  void *item2 = (int *)malloc(sizeof(int));
+  *(int *)item2 = 12;
+  length = add_to_list(&list, item2);
+  void *item3 = (char *)malloc(sizeof(char));
+  *(char *)item3 = 13;
+  length = add_to_list(&list, item3);
+  
+  void *array[4];
+  int maxItems = 4;
+
+  int no_of_elements = asArray(list, array,maxItems);
+  assert(no_of_elements == 4);
+  traverseArray(list, array, maxItems);
+  printf("Items are inserted into the given array\n");
 }
 
