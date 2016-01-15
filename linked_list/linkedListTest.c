@@ -348,3 +348,30 @@ void test_map(){
 
   printf("All items are mapped\n");
 }
+
+void * sum(void* hint, void* previousItem, void* item){
+  *(int *)previousItem += *(int *)item;
+  return previousItem;
+}
+
+void test_reduce(){
+  LinkedList list = createList();
+  void *item = (int *)malloc(sizeof(int));
+  *(int *)item = 10;
+  int length = add_to_list(&list, item);
+  void *item1 = (int *)malloc(sizeof(int));
+  *(int *)item1 = 11;
+  length = add_to_list(&list, item1);
+  void *item2 = (int *)malloc(sizeof(int));
+  *(int *)item2 = 12;
+  length = add_to_list(&list, item2);
+  void *item3 = (char *)malloc(sizeof(char));
+  *(char *)item3 = 13;
+  length = add_to_list(&list, item3);
+
+  int initial_value = 10;
+  int * result = (int *)reduce(list, sum, NULL, &initial_value);
+  assert(*result == 56);
+  printf("Reduce is done by sum\n");
+
+}

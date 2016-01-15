@@ -163,4 +163,13 @@ LinkedList map(LinkedList list, ConvertFunc convert, void * hint){
   }
   return mapped_list;
 }
+
+void *reduce(LinkedList list, Reducer reduce, void *hint, void *initialValue){
+  Element *node = (Element *)list.first;
+  while(node != NULL){
+    initialValue = reduce(hint, initialValue, node->value);
+    node = node->next; 
+  }
+  return initialValue;
+}
   
