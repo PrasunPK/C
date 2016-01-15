@@ -13,6 +13,8 @@ typedef void (*ElementProcessor)(void *);
 
 typedef int MatchFunc(void *, void *);
 
+typedef void ConvertFunc(void* hint, void* sourceItem, void* destinationItem);
+
 LinkedList createList(void);
 int add_to_list(LinkedList *, void *);
 void *get_first_element(LinkedList list);
@@ -24,3 +26,5 @@ void * deleteElementAt(LinkedList *, int);
 int asArray(LinkedList, void **, int maxElements);
 LinkedList  filter(LinkedList, MatchFunc, void * );
 LinkedList reverse(LinkedList);
+LinkedList map(LinkedList, ConvertFunc, void * );
+  

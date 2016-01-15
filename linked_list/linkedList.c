@@ -150,3 +150,17 @@ LinkedList reverse(LinkedList list){
   } 
   return list_to_add;
 }
+
+LinkedList map(LinkedList list, ConvertFunc convert, void * hint){
+  LinkedList mapped_list = createList();
+  Element * node = (Element *)list.first;
+  void * destination;
+  while(node != NULL){
+    destination = (void *)malloc(sizeof(void));
+    convert(hint, node->value, destination);
+    int l = add_to_list(&mapped_list, destination);
+    node = node->next; 
+  }
+  return mapped_list;
+}
+  

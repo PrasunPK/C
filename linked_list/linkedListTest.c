@@ -309,3 +309,42 @@ void test_reverse(){
   printf("Given linked list has been reversed\n");
 }
 
+void add(void * hint,void *sourceItem, void *destinationItem){
+  // destinationItem = (int *)malloc(sizeof(int));
+  int * given_hint = (int *)hint;
+  int * given_sourceItem = (int *)sourceItem;
+  int * given_destinationItem = (int *)destinationItem;
+  *given_destinationItem = *given_sourceItem + *given_hint;
+}
+
+void test_map(){
+  LinkedList list = createList();
+  void *item = (int *)malloc(sizeof(int));
+  *(int *)item = 10;
+  int length = add_to_list(&list, item);
+  void *item1 = (int *)malloc(sizeof(int));
+  *(int *)item1 = 11;
+  length = add_to_list(&list, item1);
+  void *item2 = (int *)malloc(sizeof(int));
+  *(int *)item2 = 12;
+  length = add_to_list(&list, item2);
+  void *item3 = (char *)malloc(sizeof(char));
+  *(char *)item3 = 13;
+  length = add_to_list(&list, item3);
+
+  int hint = 2;
+  
+  LinkedList mapped_list = map(list, add, &hint);
+  assert(mapped_list.length == 4);
+  printf("All items are inserted\n");
+  
+  assert(*(int *)mapped_list.first->value == 12);
+  assert(*(int *)mapped_list.last->value == 15);
+  int element = *(int *)getElementAt(mapped_list, 1);
+  int element1 = *(int *)getElementAt(mapped_list, 2);
+
+  assert(element == 13);
+  assert(element1 == 14);
+
+  printf("All items are mapped\n");
+}
